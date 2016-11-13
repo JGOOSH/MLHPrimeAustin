@@ -6,7 +6,22 @@ app = Flask(__name__)
 
 # oppList is the defined as the current Opportunity List
 totOpps = []
-totUsers = {}
+totUsers = {
+    'james': [
+        'Gabriel Richardson',
+        '2162454523',
+        '3829 Norman Lane, Flower Mound, Texas',
+        18,
+        '1. I like volunteering'
+    ],
+    'goosh': [
+        'Jamin Goo',
+        '5203893829',
+        '2537 E Dean Keeton, Austin, Texas',
+        19,
+        '1. I love volunteering.\n2. I also love peace'
+    ]
+}
 
 
 # object posted: ["userName", "PhoneNumber", "address"]
