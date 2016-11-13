@@ -17,7 +17,8 @@ def addUser():
     phonenumber = request.form['phonenumber']
     address = request.form['address']
     age = request.form['age']
-    totUsers.append([username, phonenumber, address, age])
+    bio = request.form['bio']
+    totUsers.append([username, phonenumber, address, age, bio])
     userInterest[username] = []
     return str(totUsers)
 
