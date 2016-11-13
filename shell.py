@@ -1,13 +1,12 @@
-#basic shell with data for our project
-#data is manually added until further notice
+# basic shell with data for our project
+# data is manually added until further notice
 from flask import Flask, render_template, request
 app = Flask(__name__)
 
 
 # oppList is the defined as the current Opportunity List
 totOpps = []
-totUsers = []
-userInterest = {}
+totUsers = {}
 
 
 # object posted: ["userName", "PhoneNumber", "address"]
@@ -19,24 +18,19 @@ def addUser():
     address = request.form['address']
     age = request.form['age']
     bio = request.form['bio']
-    totUsers.append([username, name, phonenumber, address, age, bio])
-    userInterest[username] = []
+    totUsers[username] = [name, phonenumber, address, age, bio, []]
     return str(totUsers)
 
 
 @app.route('/addInterest', methods=['POST'])
-def addInterest(username):
+def addInterest():
+    username = request.form['username']
     newinterest = request.form['newinterest']
-    if username in userInterest:
-        userInterest[username].append(newinterest)
+    if username in totUsers:
+        totUsers[username][5].append(newinterest)
     else:
-        userInterest[username] = [newinterest]
+        return "username " + username + " does not exist"
     return str(newinterest)
-
-
-@app.route('/curUserInterest', methods=['GET'])
-def getInterests(username):
-    return str(userInterest[username])
 
 
 @app.route('/curUser', methods=['GET'])
