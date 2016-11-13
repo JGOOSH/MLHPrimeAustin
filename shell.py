@@ -14,11 +14,12 @@ userInterest = {}
 @app.route('/addUser', methods=['POST'])
 def addUser():
     username = request.form['username']
+    name = request.form['name']
     phonenumber = request.form['phonenumber']
     address = request.form['address']
     age = request.form['age']
     bio = request.form['bio']
-    totUsers.append([username, phonenumber, address, age, bio])
+    totUsers.append([username, name, phonenumber, address, age, bio])
     userInterest[username] = []
     return str(totUsers)
 
