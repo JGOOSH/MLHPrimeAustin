@@ -18,7 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -28,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
     private SwipeDeck cardStack;
     private Context context = this;
     private SwipeDeckAdapter adapter;
-    private ArrayList<String> testData;
-
+    private ArrayList<UserObjectParser.User> testData;
+    private UserObjectParser parser;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,17 +43,15 @@ public class MainActivity extends AppCompatActivity {
                 .putBoolean("isFirstRun", false).commit();
 
         //Not first login so run this vvvv
-
         setContentView(R.layout.activity_main);
-        cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
 
         testData = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            testData.add(String.valueOf(i));
-        }
+        parser = new UserObjectParser();
+        testData = parser.getAllUsers();
+        cardStack = (SwipeDeck) findViewById(R.id.swipe_deck);
 
         adapter = new SwipeDeckAdapter(testData, this);
-        if(cardStack != null){
+        if (cardStack != null) {
             cardStack.setAdapter(adapter);
         }
         cardStack.setCallback(new SwipeDeck.SwipeDeckCallback() {
@@ -88,10 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
     public class SwipeDeckAdapter extends BaseAdapter {
 
-        private List<String> data;
+        private ArrayList<UserObjectParser.User> data;
         private Context context;
 
-        public SwipeDeckAdapter(List<String> data, Context context) {
+        public SwipeDeckAdapter(ArrayList<UserObjectParser.User> data, Context context) {
             this.data = data;
             this.context = context;
         }
@@ -121,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
                 v = inflater.inflate(R.layout.test_card2, parent, false);
             }
             //((TextView) v.findViewById(R.id.textView2)).setText(data.get(position));
+            String nameAge = data.get(position).getName() + ", " + data.get(position).getAge();
+            ((TextView) v.findViewById(R.id.name)).setText(nameAge);
+            ((TextView) v.findViewById(R.id.location)).setText(data.get(position).getAddress());
+            ((TextView) v.findViewById(R.id.interest1)).setText(data.get(position).getBio());
 
             v.setOnClickListener(new View.OnClickListener() {
                 @Override
