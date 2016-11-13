@@ -1,1 +1,1 @@
-include ':app'
+include ':app', ':twilio-ip-messaging-android-0.10.0', ':twilio-common-android-0.6.1'

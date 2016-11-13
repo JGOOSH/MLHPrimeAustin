@@ -10,6 +10,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/twilio-common-android-0.6.1" />
+            <option value="$PROJECT_DIR$/twilio-ip-messaging-android-0.10.0" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
