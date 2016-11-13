@@ -1,4 +1,8 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class UserObjectParser {
 
@@ -9,7 +13,6 @@ public class UserObjectParser {
         private String address;
         private String age;
         private String bio;
-        private LinkedList<String> interests;
 
         public User() {
             this.username = "";
@@ -18,7 +21,6 @@ public class UserObjectParser {
             this.address = "";
             this.age = "";
             this.bio = "";
-            this.interests = new LinkedList<>();
         }
 
         public void setUsername(String username) {
@@ -45,14 +47,6 @@ public class UserObjectParser {
             this.bio = bio;
         }
 
-        public void addInterest(String interest) {
-            this.interests.add(interest);
-        }
-
-        public void addInterest(int index, String interest) {
-            this.interests.add(index, interest);
-        }
-
         public String getUsername() {
             return this.username;
         }
@@ -77,32 +71,51 @@ public class UserObjectParser {
             return this.bio;
         }
 
-        public LinkedList<String> getInterests() {
-            return this.interests;
+        @Override
+        public String toString() {
+            return this.username+" "+this.name+" "+this.phoneNumber+" "+this.address+" "+this.age+" "+this.bio;
         }
     }
 
     private HashMap<String, User> users;
 
-    public UserObjectParser() {
-        this.users = new HashMap<>();
+    private String results;
+
+    private void sendGet() throws Exception {
+        String url = "http://127.0.0.1:5000/curUser";
+        URL obj = new URL(url);
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        con.setRequestMethod("GET");
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        StringBuffer result = new StringBuffer();
+        String line = "";
+        while ((line = in.readLine()) != null) {
+            result.append(line);
+        }
+        this.results = result.toString();
     }
 
-    public UserObjectParser(String totUsers) {
-        this();
+    public UserObjectParser() {
+        try {
+            sendGet();
+        } catch(Exception e) {
+            System.err.println(e);
+        }
+        this.users = new HashMap<>();
+
         LinkedList<ArrayList<String>> tokens = new LinkedList<>();
         int start = -1;
         tokens.add(new ArrayList<>());
-        for(int i = 0; i < totUsers.length(); i++) {
-            if(totUsers.charAt(i) == ']') {
-                if(i+1 < totUsers.length() && totUsers.charAt(i+1) == ']') {
+        for(int i = 0; i < this.results.length(); i++) {
+            if(this.results.charAt(i) == ']') {
+                if(i+1 < this.results.length() && this.results.charAt(i+1) == ']') {
                     tokens.add(new ArrayList<>());
                 }
-            } else if(totUsers.charAt(i) == '\'') {
+            } else if(this.results.charAt(i) == '\'') {
                 if(start == -1) {
                     start = i+1;
                 } else {
-                    tokens.getLast().add(totUsers.substring(start, i));
+                    tokens.getLast().add(this.results.substring(start, i));
                     start = -1;
                 }
             }
@@ -116,9 +129,6 @@ public class UserObjectParser {
             user.setAge(token.get(3));
             user.setAddress(token.get(4));
             user.setBio(token.get(5));
-            for (int i = 6; i < token.size(); i++) {
-                user.addInterest(token.get(i));
-            }
             this.users.put(username, user);
         }
     }

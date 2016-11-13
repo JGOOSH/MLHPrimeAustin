@@ -18,19 +18,8 @@ def addUser():
     address = request.form['address']
     age = request.form['age']
     bio = request.form['bio']
-    totUsers[username] = [name, phonenumber, address, age, bio, []]
+    totUsers[username] = [name, phonenumber, address, age, bio]
     return str(totUsers)
-
-
-@app.route('/addInterest', methods=['POST'])
-def addInterest():
-    username = request.form['username']
-    newinterest = request.form['newinterest']
-    if username in totUsers:
-        totUsers[username][5].append(newinterest)
-    else:
-        return "username " + username + " does not exist"
-    return str(newinterest)
 
 
 @app.route('/curUser', methods=['GET'])
