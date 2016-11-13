@@ -171,6 +171,7 @@ public class BasicIPMessagingClient implements IPMessagingClientListener, Twilio
 
     private void createClientWithToken(ILoginListener listener) {
         ipMessagingClient = TwilioIPMessagingSDK.createIPMessagingClientWithToken(this.capabilityToken, BasicIPMessagingClient.this);
+        Log.i("squarepants", ipMessagingClient + "");
         if(ipMessagingClient != null) {
             if(listener != null) {
                 listener.onLoginFinished();

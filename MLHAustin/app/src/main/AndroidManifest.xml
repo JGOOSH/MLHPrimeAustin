@@ -2,6 +2,7 @@
     package="com.daprlabs.aaron.swipedeck2">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <uses-permission android:name="android.permission.INTERNET" />
 
 
@@ -21,6 +22,8 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".FirstLogIn"/>
         <activity
             android:name="com.twilio.ipmessaging.ui.ChatActivity"
             android:noHistory="true"
