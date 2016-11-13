@@ -65,10 +65,11 @@ public class MainActivity extends AppCompatActivity {
         cardStack.setRightImage(R.id.right_image);
 
         Button messenger = (Button) findViewById(R.id.messenger);
+        final Intent intent = new Intent(this, BlankActivity.class);
         messenger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(new Intent(v.getContext(), Messenger.class));
+               startActivity(intent);
             }
         });
     }

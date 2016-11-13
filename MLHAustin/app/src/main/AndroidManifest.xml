@@ -8,7 +8,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name="com.daprlabs.aaron.swipedeck2.MainActivity">
+        <activity android:name=".MainActivity">
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,6 +16,7 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".BlankActivity"/>
 
     </application>
 

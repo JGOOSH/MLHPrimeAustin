@@ -6,12 +6,9 @@ import android.support.v7.app.AppCompatActivity;
 /**
  * Created by Gabriel Richardson on 11/13/2016.
  */
-public class Messenger extends AppCompatActivity{
-
-    @Override
+public class BlankActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.messenger);
-        
     }
 }
