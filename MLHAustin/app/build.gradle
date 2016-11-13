@@ -10,6 +10,8 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+
+        multiDexEnabled true
     }
     buildTypes {
         release {
@@ -17,16 +19,23 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
     testCompile 'org.mockito:mockito-core:1.10.19'
     compile 'com.android.support:appcompat-v7:23.4.0'
-
+    compile 'com.android.support:multidex:1.0.1'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'com.android.support:cardview-v7:23.0.+'
     compile 'com.android.support:recyclerview-v7:23.0.+'
     compile project(path: ':swipedeck')
+    compile files('Libs/easyadapter-1.5.0.jar')
+    compile files('Libs/twilio-ip-messaging-android.jar')
+    compile files('Libs/twilio-common-android.jar')
 }

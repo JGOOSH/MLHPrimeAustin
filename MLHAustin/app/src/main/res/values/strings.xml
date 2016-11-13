@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Volunteer Social</string>
+    <string name="title_activity_chat">ChatActivity</string>
+    <string name="send">Send</string>
+    <string name="discuss">Discuss</string>
+    <string name="message_hint">Say something</string>
+    <string name="title_activity_login1">LoginActivity1</string>
+    <string name="title_activity_chat1">ChatActivity1</string>
 </resources>

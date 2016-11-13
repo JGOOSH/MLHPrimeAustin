@@ -2,6 +2,7 @@ package com.daprlabs.aaron.swipedeck2;
 
 import com.daprlabs.aaron.swipedeck.SwipeDeck;
 import com.squareup.picasso.Picasso;
+import com.twilio.ipmessaging.ui.ChatActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
+    public static final String EXTRA_CARD = "extra_card";
     private SwipeDeck cardStack;
     private Context context = this;
     private SwipeDeckAdapter adapter;
@@ -65,11 +67,12 @@ public class MainActivity extends AppCompatActivity {
         cardStack.setRightImage(R.id.right_image);
 
         Button messenger = (Button) findViewById(R.id.messenger);
-        final Intent intent = new Intent(this, BlankActivity.class);
+        final Intent intent = new Intent(this, ChatActivity.class);
         messenger.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               startActivity(intent);
+                startActivity(intent);
+                finish();
             }
         });
     }
